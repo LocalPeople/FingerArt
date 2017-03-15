@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffoldTool", "ScaffoldTool\ScaffoldTool.csproj", "{119F7C66-CF4A-41CA-97B5-43E283398F24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XcWpfControlLib", "..\WpfScaffoldControlLib\WpfScaffoldControlLib\XcWpfControlLib.csproj", "{501F523C-A704-4BB7-AF39-0BB38CDD2496}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XcWpfControlLib", "WpfScaffoldControlLib\XcWpfControlLib.csproj", "{501F523C-A704-4BB7-AF39-0BB38CDD2496}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,16 @@
+﻿<Window x:Class="XcWpfControlLib.ProgressBarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XcWpfControlLib"
+        mc:Ignorable="d"
+        Title="脚手架智能设计软件" Height="130" Width="300" ResizeMode="NoResize" Topmost="True" Closing="Window_Closing">
+    <StackPanel VerticalAlignment="Center">
+        <TextBlock Name="taskTxt" FontSize="14" HorizontalAlignment="Left" Margin="8" Text="{Binding Text}" />
+        <Grid Margin="8,0">
+            <ProgressBar Name="progressBar" Height="15" Minimum="0" Maximum="{Binding Maximum}" Value="{Binding Value}" IsIndeterminate="{Binding IsIndeterminate}" />
+        </Grid>
+        <Button Click="Cancel_Click" HorizontalAlignment="Right" Margin="8" IsEnabled="{Binding CanCancel}">取消</Button>
+    </StackPanel>
+</Window>
