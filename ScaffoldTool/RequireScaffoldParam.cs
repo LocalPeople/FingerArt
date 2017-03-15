@@ -87,7 +87,7 @@ namespace ScaffoldTool
             writableXml.EditQuit();
 
             List<string> alreadyBuilt, notYetBuilt;
-            KJScaffoldXmlHelper.GetBuildInfo(doc, out alreadyBuilt, out notYetBuilt);
+            PKScaffoldXmlHelper.GetBuildInfo(doc, out alreadyBuilt, out notYetBuilt);
             Level[] modelingLevel = new FilteredElementCollector(doc).OfClass(typeof(Level)).Cast<Level>()
                 .Where(elem => notYetBuilt.Contains(elem.Name)).OrderBy(elem => elem.Elevation).ToArray();
 
