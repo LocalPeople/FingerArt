@@ -76,9 +76,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="XcWpfControlLib">
-      <HintPath>..\..\WpfScaffoldControlLib\WpfScaffoldControlLib\bin\Debug\XcWpfControlLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReplaceUtil.cs" />
@@ -193,7 +190,12 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WpfScaffoldControlLib\XcWpfControlLib.csproj">
+      <Project>{501f523c-a704-4bb7-af39-0bb38cdd2496}</Project>
+      <Name>XcWpfControlLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
