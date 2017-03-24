@@ -18,6 +18,6 @@
 
         <local:ModelingPanel x:Name="modelingPanel" Grid.Row="1" />
 
-        <Button HorizontalAlignment="Right" Margin="12,6" Grid.Row="2" Click="Button_Click">开始建模</Button>
+        <Button HorizontalAlignment="Right" Margin="12,6" Grid.Row="2" Click="Button_Click" Width="60" Height="25">开始建模</Button>
     </Grid>
 </Window>
