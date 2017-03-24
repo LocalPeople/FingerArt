@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:XcWpfControlLib.WpfScaffoldControlLib"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -100,8 +100,8 @@
         <TextBlock Name="textBox1" VerticalAlignment="Center" TextWrapping="Wrap" FontStyle="Italic"
                    Margin="2" Grid.Row="3" Grid.Column="1" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="8,2" Grid.Column="2">
-            <Button VerticalAlignment="Bottom" Margin="4,0" Click="Return_Click">返回设置</Button>
-            <Button Name="confirmBtn" VerticalAlignment="Bottom" Click="Confirm_Click">确认建模</Button>
+            <Button VerticalAlignment="Bottom" Margin="0,0,8,0" Click="Return_Click" Width="60" Height="25">返回设置</Button>
+            <Button Name="confirmBtn" VerticalAlignment="Bottom" Click="Confirm_Click" Width="60" Height="25">确认建模</Button>
         </StackPanel>
     </Grid>
 </UserControl>

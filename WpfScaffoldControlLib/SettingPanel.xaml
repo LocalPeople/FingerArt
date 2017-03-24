@@ -42,7 +42,7 @@
                                         <ControlTemplate>
                                             <Expander IsExpanded="True" ExpandDirection="Down">
                                                 <Expander.Header>
-                                                    <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="2,4" FontWeight="Bold" />
+                                                    <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="2,4" FontWeight="Bold" Background="LightGray" Width="{Binding ElementName=itemsControl1, Path=ActualWidth}" />
                                                 </Expander.Header>
                                                 <ItemsPresenter />
                                             </Expander>
@@ -65,7 +65,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Margin="0,2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="20" />
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
@@ -89,11 +89,11 @@
                         Margin="2" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="8,0" Grid.Row="3" HorizontalAlignment="Right">
-            <StackPanel Margin="8,0">
-                <RadioButton VerticalAlignment="Center" Checked="RadioButton_Unchecked" GotFocus="ControlExceptTipText_GotFocus" IsChecked="True">落地式扣件设计</RadioButton>
-                <RadioButton VerticalAlignment="Center" Checked="RadioButton_Checked" GotFocus="ControlExceptTipText_GotFocus">悬挑式扣件设计</RadioButton>
+            <StackPanel Margin="0,0,8,0" VerticalAlignment="Center">
+                <RadioButton VerticalAlignment="Center" Margin="0,0,0,1" Checked="RadioButton_Unchecked" GotFocus="ControlExceptTipText_GotFocus" IsChecked="True">落地式扣件设计</RadioButton>
+                <RadioButton VerticalAlignment="Center" Margin="0,1,0,0" Checked="RadioButton_Checked" GotFocus="ControlExceptTipText_GotFocus">悬挑式扣件设计</RadioButton>
             </StackPanel>
-            <Button VerticalAlignment="Bottom" Margin="0,2"
+            <Button VerticalAlignment="Bottom" Margin="0,2" Width="60" Height="25"
                 Click="Button_Click">配置确认</Button>
         </StackPanel>
     </Grid>
