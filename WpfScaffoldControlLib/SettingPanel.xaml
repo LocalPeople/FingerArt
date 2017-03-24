@@ -7,33 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <local:SettingItemTemplateSelector x:Key="dataTemplateSelector">
-            <local:SettingItemTemplateSelector.DefaultDataTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Image Source="Resources/exclamation_red.png" Margin="0,0,4,0" 
-                                    ToolTip="{Binding ErrorDesription}" Visibility="{Binding Error}"
-                                   Stretch="Uniform" />
-                        <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,8,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Value}" Grid.Column="2" VerticalAlignment="Center" />
-                    </Grid>
-                </DataTemplate>
-            </local:SettingItemTemplateSelector.DefaultDataTemplate>
-
-            <local:SettingItemTemplateSelector.SeparatorDataTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding LongName}" FontSize="14" Background="LightGray" Margin="2,4" />
-                </DataTemplate>
-            </local:SettingItemTemplateSelector.SeparatorDataTemplate>
-        </local:SettingItemTemplateSelector>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -57,9 +30,29 @@
         <Border BorderBrush="Gray" BorderThickness="1" Margin="2,8" Grid.Row="2">
             <ItemsControl Name="itemsControl1" Grid.IsSharedSizeScope="True"
                  ItemsSource="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                 ItemTemplateSelector="{StaticResource dataTemplateSelector}"
                  HorizontalContentAlignment="Stretch"
                  GotFocus="ControlExceptTipText_GotFocus">
+
+                <ItemsControl.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True" ExpandDirection="Down">
+                                                <Expander.Header>
+                                                    <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="2,4" FontWeight="Bold" />
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ItemsControl.GroupStyle>
 
                 <!--设置参数ItemsControl控件模板-->
                 <ItemsControl.Template>
@@ -69,6 +62,23 @@
                         </ScrollViewer>
                     </ControlTemplate>
                 </ItemsControl.Template>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Resources/exclamation_red.png" Margin="0,0,4,0" 
+                                    ToolTip="{Binding ErrorDesription}" Visibility="{Binding Error}"
+                                   Stretch="Uniform" />
+                            <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,8,0" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Value}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
 
             </ItemsControl>
         </Border>
