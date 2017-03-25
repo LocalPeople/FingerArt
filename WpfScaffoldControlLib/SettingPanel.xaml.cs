@@ -167,32 +167,22 @@ namespace XcWpfControlLib.WpfScaffoldControlLib
         #region 更改脚手架设计相关行为函数
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            //for (int i = SettingViewModel.OnGroundPropertiesCount; i < _viewModel.Length; i++)
-            //    _visibleViewModel.Add(_viewModel[i]);
-            //itemsControl1.Items.Refresh();
             _view.Filter = null;
             _isSettingSaved = false;
             _isBuildOnGrond = false;
         }
 
-        private void RadioButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //if (_rbInitial)
-            //{
-            //    _rbInitial = false;
-            //    return;
-            //}
-            //_visibleViewModel.RemoveRange(SettingViewModel.OnGroundPropertiesCount, _viewModel.Length - SettingViewModel.OnGroundPropertiesCount);
-            //itemsControl1.Items.Refresh();
-            _view.Filter = new Predicate<object>(FilterViewModel);
-            _isSettingSaved = false;
-            _isBuildOnGrond = true;
-        }
-
-        private bool FilterViewModel(object item)
+        private Predicate<object> _filter = delegate (object item)
         {
             SettingViewModel model = item as SettingViewModel;
             return model.GroupName != "悬挑参数";
+        };
+
+        private void RadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            _view.Filter = _filter;
+            _isSettingSaved = false;
+            _isBuildOnGrond = true;
         }
 
         private bool _isBuildOnGrond = true;
