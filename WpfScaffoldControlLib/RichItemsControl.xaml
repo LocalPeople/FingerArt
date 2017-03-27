@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="XcWpfControlLib.RichItemsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:XcWpfControlLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:ImagePathConverter x:Key="ImageConverter">
+        </local:ImagePathConverter>
+
+        <local:RichItemTemplateSelector x:Key="DataTemplateSelector">
+            <local:RichItemTemplateSelector.TextBoxDataTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Path=Value, ValidatesOnNotifyDataErrors=True}" Grid.Column="2" VerticalAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Validation.ErrorTemplate">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <DockPanel LastChildFill="True">
+                                                    <Image DockPanel.Dock="Left" Source="Resources/exclamation_red.png" Margin="0,0,4,0" Width="16" VerticalAlignment="Center"
+                                                               ToolTip="{Binding ElementName=adornedPlaceholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                                                    <AdornedElementPlaceholder Name="adornedPlaceholder" />
+                                                </DockPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                </DataTemplate>
+            </local:RichItemTemplateSelector.TextBoxDataTemplate>
+
+            <local:RichItemTemplateSelector.ComboBoxDataTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay}" IsReadOnly="True" />
+                    </Grid>
+                </DataTemplate>
+            </local:RichItemTemplateSelector.ComboBoxDataTemplate>
+
+            <local:RichItemTemplateSelector.ImageComboBoxDataTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="2" ItemsSource="{Binding Path=ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay, Converter={StaticResource ImageConverter}}" IsReadOnly="True" />
+                    </Grid>
+                </DataTemplate>
+            </local:RichItemTemplateSelector.ImageComboBoxDataTemplate>
+        </local:RichItemTemplateSelector>
+    </UserControl.Resources>
+
+    <Border BorderBrush="Gray" BorderThickness="1">
+        <ItemsControl Name="itemsControl1" Grid.IsSharedSizeScope="True"
+                 ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                 ItemTemplateSelector="{StaticResource DataTemplateSelector}"
+                 HorizontalContentAlignment="Stretch">
+
+            <ItemsControl.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True" ExpandDirection="Down">
+                                            <Expander.Header>
+                                                <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="2,4" FontWeight="Bold" Background="LightGray" Width="{Binding ElementName=itemsControl1, Path=ActualWidth}" />
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ItemsControl.GroupStyle>
+
+        </ItemsControl>
+    </Border>
+</UserControl>

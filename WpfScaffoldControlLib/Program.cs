@@ -13,7 +13,7 @@ namespace XcWpfControlLib
         static void Main()
         {
             Program app = new Program();
-            app.MainWindow = new WpfScaffoldControlLib.ScaffoldWindow1();
+            app.MainWindow = new Test.TestWindow();
             app.MainWindow.ShowDialog();
         }
     }

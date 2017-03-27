@@ -63,8 +63,14 @@
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="RichItemsControl.xaml.cs">
+      <DependentUpon>RichItemsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScaffoldWindow2.xaml.cs">
       <DependentUpon>ScaffoldWindow2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\ReplaceUtil.cs" />
     <Compile Include="SettingPanelAddDialog.xaml.cs">
@@ -78,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModelingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RichItemsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProgressBarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -250,7 +250,6 @@ namespace XcWpfControlLib.WpfScaffoldControlLib
         private string _value;
         private Visibility _error;
         private string _errorDesription;
-        internal static readonly int OnGroundPropertiesCount = 26;
 
         #region 构造函数
         internal SettingViewModel(string shortName, string longName, object value)

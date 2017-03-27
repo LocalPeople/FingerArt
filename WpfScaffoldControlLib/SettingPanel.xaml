@@ -20,7 +20,7 @@
             <TextBlock Text="项目所在地：" Margin="2,4" />
             <ComboBox Name="comboBox1" Width="150"
                       GotFocus="ControlExceptTipText_GotFocus"
-                      SelectionChanged="comboBox1_SelectionChanged" />
+                      SelectionChanged="comboBox1_SelectionChanged" ForceCursor="True" />
             <Image Name="errorProvider1" Source="Resources/exclamation_red.png" Height="15" Width="15" Margin="4,0" 
                    ToolTip="项目所在地不能为空！" />
         </StackPanel>
@@ -74,7 +74,7 @@
                             <Image Source="Resources/exclamation_red.png" Margin="0,0,4,0" 
                                     ToolTip="{Binding ErrorDesription}" Visibility="{Binding Error}"
                                    Stretch="Uniform" />
-                            <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,8,0" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,12,0" Grid.Column="1" VerticalAlignment="Center"/>
                             <TextBox Text="{Binding Value}" Grid.Column="2" VerticalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
