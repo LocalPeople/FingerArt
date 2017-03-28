@@ -1,14 +1,13 @@
-﻿<UserControl x:Class="XcWpfControlLib.RichItemsControl"
+﻿<UserControl x:Class="XcWpfControlLib.Control.RichItemsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:XcWpfControlLib"
+             xmlns:local="clr-namespace:XcWpfControlLib.Control"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <local:ImagePathConverter x:Key="ImageConverter">
-        </local:ImagePathConverter>
+        <local:ImagePathConverter x:Key="ImageConverter" />
 
         <local:RichItemTemplateSelector x:Key="DataTemplateSelector">
             <local:RichItemTemplateSelector.TextBoxDataTemplate>
@@ -27,7 +26,7 @@
                                         <Setter.Value>
                                             <ControlTemplate>
                                                 <DockPanel LastChildFill="True">
-                                                    <Image DockPanel.Dock="Left" Source="Resources/exclamation_red.png" Margin="0,0,4,0" Width="16" VerticalAlignment="Center"
+                                                    <Image DockPanel.Dock="Left" Source="../Resources/exclamation_red.png" Margin="0,0,4,0" Width="16" VerticalAlignment="Center"
                                                                ToolTip="{Binding ElementName=adornedPlaceholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
                                                     <AdornedElementPlaceholder Name="adornedPlaceholder" />
                                                 </DockPanel>
@@ -56,7 +55,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay}" IsReadOnly="True" />
+                        <ComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay}" />
                     </Grid>
                 </DataTemplate>
             </local:RichItemTemplateSelector.ComboBoxDataTemplate>
@@ -70,7 +69,15 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Column="2" ItemsSource="{Binding Path=ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay, Converter={StaticResource ImageConverter}}" IsReadOnly="True" />
+                        <ComboBox Name="ComboBox1" Grid.Column="2" ItemsSource="{Binding Path=ItemsSource}" SelectedItem="{Binding Path=Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="2" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ComboBoxItem}}}" CornerRadius="2" Margin="0,4">
+                                        <Image Margin="2" Source="{Binding Converter={StaticResource ImageConverter}}" Height="40" Stretch="UniformToFill" />
+                                    </Border>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </Grid>
                 </DataTemplate>
             </local:RichItemTemplateSelector.ImageComboBoxDataTemplate>

@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace XcWpfControlLib
+namespace XcWpfControlLib.Control
 {
     /// <summary>
     /// RichItemsControl.xaml 的交互逻辑
@@ -17,7 +17,13 @@ namespace XcWpfControlLib
     public partial class RichItemsControl : UserControl
     {
         private IEnumerable<RichItemViewModel> _itemsSource;
-        public string ImagePath { get; set; }
+        public string ImagePath
+        {
+            set
+            {
+                (Resources["ImageConverter"] as ImagePathConverter).ImageDirectory = value;
+            }
+        }
 
         public RichItemsControl()
         {
@@ -232,7 +238,7 @@ namespace XcWpfControlLib
     #region 值转换器
     public class ImagePathConverter : IValueConverter
     {
-        public string ImageDirectory { get { return @"E:\Downloads"; } }
+        public string ImageDirectory { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -242,8 +248,7 @@ namespace XcWpfControlLib
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BitmapImage image = (BitmapImage)value;
-            return Path.GetFileName(image.BaseUri.AbsolutePath);
+            throw new NotImplementedException();
         }
     }
     #endregion

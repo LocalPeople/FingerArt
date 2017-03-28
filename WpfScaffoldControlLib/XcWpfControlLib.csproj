@@ -59,51 +59,52 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelingPanel.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\ModelingPanel.xaml.cs">
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\MultiComboBox.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RichItemsControl.xaml.cs">
+    <Compile Include="Control\RichItemsControl.xaml.cs">
       <DependentUpon>RichItemsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScaffoldWindow2.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\ScaffoldWindow2.xaml.cs">
       <DependentUpon>ScaffoldWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\ReplaceUtil.cs" />
-    <Compile Include="SettingPanelAddDialog.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\SettingPanelAddDialog.xaml.cs">
       <DependentUpon>SettingPanelAddDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgressBarWindow.xaml.cs">
+    <Compile Include="ProgressBarWindow\ProgressBarWindow.xaml.cs">
       <DependentUpon>ProgressBarWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CalculationPanel.xaml">
+    <Page Include="WpfScaffoldControlLib\CalculationPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModelingPanel.xaml">
+    <Page Include="WpfScaffoldControlLib\ModelingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RichItemsControl.xaml">
+    <Page Include="Control\RichItemsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScaffoldWindow1.xaml">
+    <Page Include="WpfScaffoldControlLib\ScaffoldWindow1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScaffoldWindow2.xaml">
+    <Page Include="WpfScaffoldControlLib\ScaffoldWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingPanel.xaml">
+    <Page Include="WpfScaffoldControlLib\SettingPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CalculationPanel.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\CalculationPanel.xaml.cs">
       <DependentUpon>CalculationPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -111,22 +112,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScaffoldWindow1.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\ScaffoldWindow1.xaml.cs">
       <DependentUpon>ScaffoldWindow1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingPanel.xaml.cs">
+    <Compile Include="WpfScaffoldControlLib\SettingPanel.xaml.cs">
       <DependentUpon>SettingPanel.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingPanelAddDialog.xaml">
+    <Page Include="WpfScaffoldControlLib\SettingPanelAddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProgressBarWindow.xaml">
+    <Page Include="ProgressBarWindow\ProgressBarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MultiComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
