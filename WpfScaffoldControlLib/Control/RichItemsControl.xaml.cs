@@ -17,11 +17,14 @@ namespace XcWpfControlLib.Control
     public partial class RichItemsControl : UserControl
     {
         private IEnumerable<RichItemViewModel> _itemsSource;
+        private string _imagePath;
         public string ImagePath
         {
+            get { return _imagePath; }
             set
             {
                 (Resources["ImageConverter"] as ImagePathConverter).ImageDirectory = value;
+                _imagePath = value;
             }
         }
 
@@ -62,15 +65,15 @@ namespace XcWpfControlLib.Control
             {
                 return TextBoxDataTemplate;
             }
-            else if (vm is ComboBoxItemViewModel)
+            else if (vm is StringComboBoxItemViewModel)
             {
-                switch (((ComboBoxItemViewModel)vm).Type)
+                switch (((StringComboBoxItemViewModel)vm).Type)
                 {
-                    case ComboBoxType.ComboBox:
+                    case StringComboBoxType.ComboBox:
                         return ComboBoxDataTemplate;
-                    case ComboBoxType.ImageComboBox:
+                    case StringComboBoxType.ImageComboBox:
                         return ImageComboBoxDataTemplate;
-                    case ComboBoxType.MultipleComboBox:
+                    case StringComboBoxType.MultipleComboBox:
                         return MultipleComboBoxDataTemplate;
                 }
             }
@@ -205,32 +208,52 @@ namespace XcWpfControlLib.Control
         #endregion
     }
 
-    public enum ComboBoxType
+    public enum StringComboBoxType
     {
         ComboBox,
         ImageComboBox,
         MultipleComboBox,
     }
 
-    public class ComboBoxItemViewModel : RichItemViewModel
+    public class StringComboBoxItemViewModel : RichItemViewModel
     {
         private IEnumerable _itemsSource;
-        private ComboBoxType _type;
+        private StringComboBoxType _type;
 
         public IEnumerable ItemsSource
         {
             get { return _itemsSource; }
         }
 
-        public ComboBoxType Type
+        public StringComboBoxType Type
         {
             get { return _type; }
         }
 
-        public ComboBoxItemViewModel(string groupName, string longName, object value, IEnumerable itemsSource, ComboBoxType type) : base(groupName, longName, value)
+        public StringComboBoxItemViewModel(string groupName, string longName, object value, IEnumerable<string> stringItemsSource, StringComboBoxType type) : base(groupName, longName, value)
         {
-            _itemsSource = itemsSource;
+            _itemsSource = stringItemsSource;
             _type = type;
+        }
+    }
+
+    public class ImageComboBoxItemViewModel : RichItemViewModel
+    {
+        private IEnumerable _itemsSource;
+
+        public IEnumerable ItemsSource
+        {
+            get { return _itemsSource; }
+        }
+
+        public string ImageName { get; set; }
+        public string Description { get; set; }
+
+        public ImageComboBoxItemViewModel(string groupName, string longName, string path, IEnumerable<string> pathItemsSource, string imageName, string description = "") : base(groupName, longName, path)
+        {
+            _itemsSource = pathItemsSource;
+            ImageName = ImageName;
+            Description = description;
         }
     }
     #endregion
