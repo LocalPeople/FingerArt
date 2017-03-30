@@ -10,6 +10,7 @@
         <local:ImagePathConverter x:Key="ImageConverter" />
 
         <local:RichItemTemplateSelector x:Key="DataTemplateSelector">
+            <!--文本框数据模板-->
             <local:RichItemTemplateSelector.TextBoxDataTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -19,7 +20,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding LongName, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Value, ValidatesOnNotifyDataErrors=True}" Grid.Column="2" VerticalAlignment="Center">
+                        <TextBox Text="{Binding Value, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Grid.Column="2" VerticalAlignment="Center">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}">
                                     <Setter Property="Validation.ErrorTemplate">
@@ -45,7 +46,7 @@
                     </Grid>
                 </DataTemplate>
             </local:RichItemTemplateSelector.TextBoxDataTemplate>
-
+            <!--单选下拉框数据模板-->
             <local:RichItemTemplateSelector.ComboBoxDataTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -60,7 +61,7 @@
                     </Grid>
                 </DataTemplate>
             </local:RichItemTemplateSelector.ComboBoxDataTemplate>
-
+            <!--单选图片下拉框数据模板-->
             <local:RichItemTemplateSelector.ImageComboBoxDataTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -73,14 +74,24 @@
                         <ComboBox x:Name="ComboBox1" Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderThickness="2" BorderBrush="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ComboBoxItem}}}" CornerRadius="2" Margin="0,4">
-                                        <Image Margin="2" Source="{Binding Converter={StaticResource ImageConverter}}" Height="40" Stretch="UniformToFill">
-                                            <Image.ToolTip>
-                                                <ToolTip DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
-                                                    <Image Source="{Binding Source}" Height="200" Width="200" Stretch="UniformToFill" />
-                                                </ToolTip>
-                                            </Image.ToolTip>
-                                        </Image>
+                                    <Border BorderThickness="2" BorderBrush="{Binding (TextElement.Foreground), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" CornerRadius="2" Margin="0,4">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel VerticalAlignment="Center" Margin="4">
+                                                <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Name}" />
+                                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <Image Grid.Column="1" Margin="4" Source="{Binding Path, Converter={StaticResource ImageConverter}}" Width="40" Height="40" Stretch="UniformToFill">
+                                                <Image.ToolTip>
+                                                    <ToolTip DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
+                                                        <Image Source="{Binding Source}" Height="200" Width="200" Stretch="UniformToFill" />
+                                                    </ToolTip>
+                                                </Image.ToolTip>
+                                            </Image>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -88,7 +99,7 @@
                     </Grid>
                 </DataTemplate>
             </local:RichItemTemplateSelector.ImageComboBoxDataTemplate>
-
+            <!--多选下拉框数据模板-->
             <local:RichItemTemplateSelector.MultipleComboBoxDataTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -110,7 +121,8 @@
         <ItemsControl x:Name="itemsControl1" Grid.IsSharedSizeScope="True"
                  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                  ItemTemplateSelector="{StaticResource DataTemplateSelector}"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 Validation.Error="itemsControl1_Error">
             <ItemsControl.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

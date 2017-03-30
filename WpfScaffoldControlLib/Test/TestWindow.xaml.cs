@@ -28,9 +28,9 @@ namespace XcWpfControlLib.Test
             {
                 new TextBoxItemViewModel("布置参数","立杆纵距(m)",1.5),
                 new TextBoxItemViewModel("荷载参数","栏杆、挡板类别","栏杆、冲压钢挡脚板"),
-                new StringComboBoxItemViewModel("荷载参数","地基土类型","砂土",new string[] { "黏土","砂土","老土","真老土"},StringComboBoxType.ComboBox),
-                new StringComboBoxItemViewModel("荷载参数","图片类型","146397200983.jpg",new string[] { "51593661a65fa.jpg","146397200983.jpg","1463971882999.jpg","壁纸20170228151200.jpg","壁纸20170228151429.jpg","20130505032309_HJhAF.jpeg","Delphox-Designs-iOS-8-Desktop-Wallpaper-5.jpg"},StringComboBoxType.ImageComboBox),
-                new StringComboBoxItemViewModel("荷载参数","复选框类型","老土;砂土",new string[] { "黏土","砂土","老土","真老土"},StringComboBoxType.MultipleComboBox),
+                new StringComboBoxItemViewModel("荷载参数","地基土类型","砂土",new string[] { "黏土","砂土","老土","真老土"},StringComboBoxType.Single),
+                new StringComboBoxItemViewModel("荷载参数", "复选框类型", "老土;砂土", new string[] { "黏土", "砂土", "老土", "真老土" }, StringComboBoxType.Multiple),
+                new ImageComboBoxItemViewModel("荷载参数","图片类型",2,new ImageComboBoxItemViewModel.ImageAttribute[] { new ImageComboBoxItemViewModel.ImageAttribute(1,"图片 1","图片介绍 1","51593661a65fa.jpg"),new ImageComboBoxItemViewModel.ImageAttribute(2,"图片 2", "图片介绍 2", "146397200983.jpg") }),
             };
             itemsControl.ItemsSource = itemSource;
         }

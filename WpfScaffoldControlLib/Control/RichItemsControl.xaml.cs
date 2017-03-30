@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -48,6 +49,18 @@ namespace XcWpfControlLib.Control
             }
         }
         #endregion
+
+        #region 事件
+        private int _errorCount = 0;
+        private void itemsControl1_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added) _errorCount++;
+            else _errorCount--;
+            OnErrorsChanged?.Invoke(this, _errorCount);
+        }
+
+        public event EventHandler<int> OnErrorsChanged;
+        #endregion
     }
 
     #region 数据模板选择器
@@ -65,15 +78,17 @@ namespace XcWpfControlLib.Control
             {
                 return TextBoxDataTemplate;
             }
+            else if (vm is ImageComboBoxItemViewModel)
+            {
+                return ImageComboBoxDataTemplate;
+            }
             else if (vm is StringComboBoxItemViewModel)
             {
                 switch (((StringComboBoxItemViewModel)vm).Type)
                 {
-                    case StringComboBoxType.ComboBox:
+                    case StringComboBoxType.Single:
                         return ComboBoxDataTemplate;
-                    case StringComboBoxType.ImageComboBox:
-                        return ImageComboBoxDataTemplate;
-                    case StringComboBoxType.MultipleComboBox:
+                    case StringComboBoxType.Multiple:
                         return MultipleComboBoxDataTemplate;
                 }
             }
@@ -87,14 +102,14 @@ namespace XcWpfControlLib.Control
     {
         private string _groupName;
         private string _longName;
-        private string _value;
+        private object _value;
 
         #region 构造函数
         public RichItemViewModel(string groupName, string longName, object value)
         {
             _groupName = groupName;
             _longName = longName;
-            _value = value.ToString();
+            _value = value;
         }
         #endregion
 
@@ -109,7 +124,7 @@ namespace XcWpfControlLib.Control
             get { return _longName; }
         }
 
-        public virtual string Value
+        public virtual object Value
         {
             get { return _value; }
             set
@@ -139,7 +154,7 @@ namespace XcWpfControlLib.Control
         private bool _hasErrors;
 
         #region 属性
-        public override string Value
+        public override object Value
         {
             get
             {
@@ -151,7 +166,7 @@ namespace XcWpfControlLib.Control
                 if (_errorDesription == INT_ERROR_TIP)
                 {
                     int result;
-                    if (!int.TryParse(value, out result))
+                    if (!int.TryParse(value.ToString(), out result))
                     {
                         _hasErrors = true;
                     }
@@ -159,7 +174,7 @@ namespace XcWpfControlLib.Control
                 else if (_errorDesription == DOUBLE_ERROR_TIP)
                 {
                     double result;
-                    if (!double.TryParse(value, out result))
+                    if (!double.TryParse(value.ToString(), out result))
                     {
                         _hasErrors = true;
                     }
@@ -167,7 +182,7 @@ namespace XcWpfControlLib.Control
                 else if (_errorDesription == STRING_ERROR_TIP)
                 {
                     double result;
-                    if (double.TryParse(value, out result))
+                    if (double.TryParse(value.ToString(), out result))
                     {
                         _hasErrors = true;
                     }
@@ -210,9 +225,8 @@ namespace XcWpfControlLib.Control
 
     public enum StringComboBoxType
     {
-        ComboBox,
-        ImageComboBox,
-        MultipleComboBox,
+        Single,
+        Multiple,
     }
 
     public class StringComboBoxItemViewModel : RichItemViewModel
@@ -230,9 +244,9 @@ namespace XcWpfControlLib.Control
             get { return _type; }
         }
 
-        public StringComboBoxItemViewModel(string groupName, string longName, object value, IEnumerable<string> stringItemsSource, StringComboBoxType type) : base(groupName, longName, value)
+        public StringComboBoxItemViewModel(string groupName, string longName, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(groupName, longName, value)
         {
-            _itemsSource = stringItemsSource;
+            _itemsSource = itemsSource;
             _type = type;
         }
     }
@@ -246,14 +260,39 @@ namespace XcWpfControlLib.Control
             get { return _itemsSource; }
         }
 
-        public string ImageName { get; set; }
-        public string Description { get; set; }
-
-        public ImageComboBoxItemViewModel(string groupName, string longName, string path, IEnumerable<string> pathItemsSource, string imageName, string description = "") : base(groupName, longName, path)
+        public ImageComboBoxItemViewModel(string groupName, string longName, int id, IEnumerable<ImageAttribute> itemsSource) : base(groupName, longName, GetValueById(itemsSource, id))
         {
-            _itemsSource = pathItemsSource;
-            ImageName = ImageName;
-            Description = description;
+            _itemsSource = itemsSource;
+        }
+
+        private static object GetValueById(IEnumerable<ImageAttribute> itemsSource, int id)
+        {
+            foreach (var item in itemsSource)
+            {
+                if (item.Id == id) return item;
+            }
+            return null;
+        }
+
+        public class ImageAttribute
+        {
+            public int Id { get; }
+            public string Name { get; }
+            public string Description { get; }
+            public string Path { get; }
+
+            public ImageAttribute(int id, string name, string description, string path)
+            {
+                Id = id;
+                Name = name;
+                Description = description;
+                Path = path;
+            }
+
+            public override string ToString()
+            {
+                return Id.ToString();
+            }
         }
     }
     #endregion
