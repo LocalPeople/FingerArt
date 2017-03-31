@@ -45,7 +45,7 @@ namespace XcWpfControlLib.Control
             {
                 _itemsSource = value;
                 ListCollectionView _view = (ListCollectionView)CollectionViewSource.GetDefaultView(_itemsSource);
-                _view.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
+                _view.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
             }
         }
         #endregion
@@ -100,28 +100,28 @@ namespace XcWpfControlLib.Control
     #region 数据模型
     public abstract class RichItemViewModel : INotifyPropertyChanged
     {
-        private string _groupName;
-        private string _longName;
+        private string _group;
+        private string _name;
         private object _value;
 
         #region 构造函数
-        public RichItemViewModel(string groupName, string longName, object value)
+        public RichItemViewModel(string group, string name, object value)
         {
-            _groupName = groupName;
-            _longName = longName;
+            _group = group;
+            _name = name;
             _value = value;
         }
         #endregion
 
         #region 属性
-        public string GroupName
+        public string Group
         {
-            get { return _groupName; }
+            get { return _group; }
         }
 
-        public string LongName
+        public string Name
         {
-            get { return _longName; }
+            get { return _name; }
         }
 
         public virtual object Value
@@ -304,7 +304,9 @@ namespace XcWpfControlLib.Control
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string imagePath = Path.Combine(ImageDirectory, (string)value);
+            string imagePath = string.IsNullOrWhiteSpace(ImageDirectory) ?
+                value.ToString() :
+                Path.Combine(ImageDirectory, (string)value);
             return new BitmapImage(new Uri(imagePath));
         }
 

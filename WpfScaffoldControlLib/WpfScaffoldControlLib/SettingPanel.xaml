@@ -16,12 +16,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Height="Auto">
-            <Image Source="Resources/location.png" Width="25" Height="25" Stretch="Uniform" />
+            <Image Source="../Resources/location.png" Width="25" Height="25" Stretch="Uniform" />
             <TextBlock Text="项目所在地：" Margin="2,4" />
             <ComboBox Name="comboBox1" Width="150"
                       GotFocus="ControlExceptTipText_GotFocus"
                       SelectionChanged="comboBox1_SelectionChanged" ForceCursor="True" />
-            <Image Name="errorProvider1" Source="Resources/exclamation_red.png" Height="15" Width="15" Margin="4,0" 
+            <Image Name="errorProvider1" Source="../Resources/exclamation_red.png" Height="15" Width="15" Margin="4,0" 
                    ToolTip="项目所在地不能为空！" />
         </StackPanel>
 
@@ -71,7 +71,7 @@
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="Resources/exclamation_red.png" Margin="0,0,4,0" 
+                            <Image Source="../Resources/exclamation_red.png" Margin="0,0,4,0" 
                                     ToolTip="{Binding ErrorDesription}" Visibility="{Binding Error}"
                                    Stretch="Uniform" />
                             <TextBlock Text="{Binding LongName, StringFormat={}{0}：}" Margin="0,0,12,0" Grid.Column="1" VerticalAlignment="Center"/>
@@ -84,7 +84,7 @@
         </Border>
 
         <StackPanel Name="stackpanel1" Orientation="Horizontal" Margin="8,0" Grid.Row="3" HorizontalAlignment="Left">
-            <Image Source="Resources/exclamation.png" Height="30" Width="30" />
+            <Image Source="../Resources/exclamation.png" Height="30" Width="30" />
             <TextBlock Name="tipText1" VerticalAlignment="Center" FontStyle="Italic"
                         Margin="2" />
         </StackPanel>

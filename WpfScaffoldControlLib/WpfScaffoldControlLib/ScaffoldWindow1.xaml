@@ -12,14 +12,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Image Source="Resources/logo2.png"
+        <Image Source="../Resources/logo2.png"
                Stretch="Uniform" HorizontalAlignment="Left" Margin="4,4,4,8" Height="40" />
 
         <TabControl Name="tabControl1" TabStripPlacement="Left" BorderThickness="0" Grid.Row="1" Grid.RowSpan="2">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Resources/Setting.png" Height="40" Width="40" />
+                        <Image Source="../Resources/Setting.png" Height="40" Width="40" />
                         <TextBlock Text="设置参数" FontSize="14" Margin="4" FontWeight="Bold" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -29,7 +29,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Resources/Calculation.png" Height="40" Width="40" />
+                        <Image Source="../Resources/Calculation.png" Height="40" Width="40" />
                         <TextBlock Text="设计校核" FontSize="14" Margin="4" FontWeight="Bold" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>

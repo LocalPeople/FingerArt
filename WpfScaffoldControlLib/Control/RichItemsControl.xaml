@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding LongName, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
                         <TextBox Text="{Binding Value, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Grid.Column="2" VerticalAlignment="Center">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}">
@@ -55,7 +55,7 @@
                             <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding LongName, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
                         <ComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}">
                         </ComboBox>
                     </Grid>
@@ -70,7 +70,7 @@
                             <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding LongName, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
                         <ComboBox x:Name="ComboBox1" Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
@@ -108,7 +108,7 @@
                             <ColumnDefinition Width="Auto" SharedSizeGroup="Key" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding LongName, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
                         <local:MultiComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" Text="{Binding Value, Mode=TwoWay}">
                         </local:MultiComboBox>
                     </Grid>
@@ -123,6 +123,14 @@
                  ItemTemplateSelector="{StaticResource DataTemplateSelector}"
                  HorizontalContentAlignment="Stretch"
                  Validation.Error="itemsControl1_Error">
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ItemsPresenter Margin="0,8,8,8" />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+
             <ItemsControl.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

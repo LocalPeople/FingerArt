@@ -59,6 +59,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataXml\RichItemsControlUtil.cs" />
     <Compile Include="WpfScaffoldControlLib\ModelingPanel.xaml.cs">
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
     </Compile>
@@ -178,6 +179,7 @@
   <ItemGroup>
     <Resource Include="Resources\logo2.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

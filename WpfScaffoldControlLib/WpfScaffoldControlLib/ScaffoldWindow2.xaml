@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="Resources/logo2.png" 
+        <Image Source="../Resources/logo2.png" 
                Stretch="Uniform" HorizontalAlignment="Left" Margin="4,4,4,8" Height="40" />
 
         <local:ModelingPanel x:Name="modelingPanel" Grid.Row="1" />
