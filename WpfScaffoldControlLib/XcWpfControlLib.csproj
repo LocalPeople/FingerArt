@@ -59,7 +59,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataXml\RichItemsControlUtil.cs" />
+    <Compile Include="DataXml\RichItemsControlXmlUtil.cs" />
     <Compile Include="WpfScaffoldControlLib\ModelingPanel.xaml.cs">
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
     </Compile>

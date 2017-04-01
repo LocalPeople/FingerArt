@@ -194,15 +194,23 @@ namespace XcWpfControlLib.Control
         }
         #endregion
 
-        public TextBoxItemViewModel(string groupName, string longName, object value) : base(groupName, longName, value)
+        public TextBoxItemViewModel(string group, string name, object value) : base(group, name, value)
         {
-            Type valueType = value.GetType();
-            if (valueType == typeof(int))
+            string valueToString = value.ToString();
+            int intTemp;
+            double doubleTemp;
+            if (int.TryParse(valueToString, out intTemp))
+            {
                 _errorDesription = INT_ERROR_TIP;
-            else if (valueType == typeof(double))
+            }
+            else if (double.TryParse(valueToString, out doubleTemp))
+            {
                 _errorDesription = DOUBLE_ERROR_TIP;
-            else if (valueType == typeof(string))
+            }
+            else
+            {
                 _errorDesription = STRING_ERROR_TIP;
+            }
         }
 
         #region INotifyDataErrorInfo
@@ -231,10 +239,10 @@ namespace XcWpfControlLib.Control
 
     public class StringComboBoxItemViewModel : RichItemViewModel
     {
-        private IEnumerable _itemsSource;
+        private IEnumerable<string> _itemsSource;
         private StringComboBoxType _type;
 
-        public IEnumerable ItemsSource
+        public IEnumerable<string> ItemsSource
         {
             get { return _itemsSource; }
         }
@@ -244,7 +252,7 @@ namespace XcWpfControlLib.Control
             get { return _type; }
         }
 
-        public StringComboBoxItemViewModel(string groupName, string longName, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(groupName, longName, value)
+        public StringComboBoxItemViewModel(string group, string name, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(group, name, value)
         {
             _itemsSource = itemsSource;
             _type = type;
@@ -253,14 +261,14 @@ namespace XcWpfControlLib.Control
 
     public class ImageComboBoxItemViewModel : RichItemViewModel
     {
-        private IEnumerable _itemsSource;
+        private IEnumerable<ImageAttribute> _itemsSource;
 
-        public IEnumerable ItemsSource
+        public IEnumerable<ImageAttribute> ItemsSource
         {
             get { return _itemsSource; }
         }
 
-        public ImageComboBoxItemViewModel(string groupName, string longName, int id, IEnumerable<ImageAttribute> itemsSource) : base(groupName, longName, GetValueById(itemsSource, id))
+        public ImageComboBoxItemViewModel(string group, string name, int id, IEnumerable<ImageAttribute> itemsSource) : base(group, name, GetValueById(itemsSource, id))
         {
             _itemsSource = itemsSource;
         }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="TestWindow" Height="300" Width="300">
     <Grid>
-        <root:RichItemsControl x:Name="itemsControl" ImagePath="E:\Downloads">
+        <root:RichItemsControl x:Name="itemsControl">
         </root:RichItemsControl>
     </Grid>
 </Window>

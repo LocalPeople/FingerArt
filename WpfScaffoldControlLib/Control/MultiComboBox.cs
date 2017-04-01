@@ -19,8 +19,11 @@ namespace XcWpfControlLib.Control
         {
             base.OnApplyTemplate();
             ListBox listBox = Template.FindName("PART_ListBox", this) as ListBox;
-            listBox.SelectionChanged += ListBox_SelectionChanged;
-            listBox.Loaded += ListBox_Loaded;
+            if (listBox != null)
+            {
+                listBox.SelectionChanged += ListBox_SelectionChanged;
+                listBox.Loaded += ListBox_Loaded;
+            }
         }
 
         private bool _isInit = true;
