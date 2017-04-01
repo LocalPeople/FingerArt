@@ -8,7 +8,7 @@ using XcWpfControlLib.WpfScaffoldControlLib;
 namespace ScaffoldTool
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    class SettingStartUp : IExternalCommand
+    public class SettingStartUp : IExternalCommand
     {
         private XcWpfControlLib.ProgressArgs progressBar;
 
