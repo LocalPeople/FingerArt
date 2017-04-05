@@ -2,7 +2,9 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using XcWpfControlLib.WpfScaffoldControlLib;
 
 namespace ScaffoldTool
@@ -11,6 +13,18 @@ namespace ScaffoldTool
     public class SettingStartUp : IExternalCommand
     {
         private XcWpfControlLib.ProgressArgs progressBar;
+
+        //static SettingStartUp()
+        //{
+        //    AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+        //}
+
+        //private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        //{
+        //    AssemblyName assemblyName = new AssemblyName(args.Name);
+        //    TaskDialog.Show("Rvt", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Dll", assemblyName.Name + ".dll"));
+        //    return Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Dll", assemblyName.Name + ".dll"));
+        //}
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
