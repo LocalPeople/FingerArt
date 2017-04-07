@@ -84,7 +84,7 @@ namespace XcWpfControlLib.Control
             }
             else if (vm is StringComboBoxItemViewModel)
             {
-                switch (((StringComboBoxItemViewModel)vm).Type)
+                switch (((StringComboBoxItemViewModel)vm).StringType)
                 {
                     case StringComboBoxType.Single:
                         return ComboBoxDataTemplate;
@@ -103,13 +103,15 @@ namespace XcWpfControlLib.Control
         private string _group;
         private string _name;
         private object _value;
+        private RichItemType _type;
 
         #region 构造函数
-        public RichItemViewModel(string group, string name, object value)
+        public RichItemViewModel(string group, string name, object value, RichItemType type)
         {
             _group = group;
             _name = name;
             _value = value;
+            _type = type;
         }
         #endregion
 
@@ -143,6 +145,11 @@ namespace XcWpfControlLib.Control
                 OnPropertyChanged("Value");
             }
         }
+
+        public RichItemType Type
+        {
+            get { return _type; }
+        }
         #endregion
 
         #region INotifyPropertyChanged
@@ -153,6 +160,14 @@ namespace XcWpfControlLib.Control
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
+    }
+
+    public enum RichItemType
+    {
+        普通文本框,
+        文本下拉单选框,
+        文本下拉多选框,
+        图片下拉单选框,
     }
 
     public class TextBoxItemViewModel : RichItemViewModel, INotifyDataErrorInfo
@@ -204,7 +219,7 @@ namespace XcWpfControlLib.Control
         }
         #endregion
 
-        public TextBoxItemViewModel(string group, string name, object value) : base(group, name, value)
+        public TextBoxItemViewModel(string group, string name, object value) : base(group, name, value, RichItemType.普通文本框)
         {
             string valueToString = value.ToString();
             int intTemp;
@@ -262,15 +277,20 @@ namespace XcWpfControlLib.Control
             }
         }
 
-        public StringComboBoxType Type
+        public StringComboBoxType StringType
         {
             get { return _type; }
         }
 
-        public StringComboBoxItemViewModel(string group, string name, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(group, name, value)
+        public StringComboBoxItemViewModel(string group, string name, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(group, name, value, GetRichItemType(type))
         {
             _itemsSource = itemsSource;
             _type = type;
+        }
+
+        private static RichItemType GetRichItemType(StringComboBoxType type)
+        {
+            return type == StringComboBoxType.Single ? RichItemType.文本下拉单选框 : RichItemType.文本下拉多选框;
         }
     }
 
@@ -288,16 +308,19 @@ namespace XcWpfControlLib.Control
             }
         }
 
-        public ImageComboBoxItemViewModel(string group, string name, int id, IEnumerable<ImageAttribute> itemsSource) : base(group, name, GetValueById(itemsSource, id))
+        public ImageComboBoxItemViewModel(string group, string name, int id, IEnumerable<ImageAttribute> itemsSource) : base(group, name, GetValueById(itemsSource, id), RichItemType.图片下拉单选框)
         {
             _itemsSource = itemsSource;
         }
 
         private static object GetValueById(IEnumerable<ImageAttribute> itemsSource, int id)
         {
-            foreach (var item in itemsSource)
+            if (itemsSource != null)
             {
-                if (item.Id == id) return item;
+                foreach (var item in itemsSource)
+                {
+                    if (item.Id == id) return item;
+                }
             }
             return new ImageAttribute();
         }

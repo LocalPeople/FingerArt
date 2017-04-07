@@ -200,7 +200,7 @@ namespace XcWpfControlLib.DataXml
         public override void Write(XmlElement root, RichItemViewModel viewModel, Dictionary<string, int> groupStringHashTable)
         {
             StringComboBoxItemViewModel stringComboBoxVM = (StringComboBoxItemViewModel)viewModel;
-            XmlElement comboBoxItem = stringComboBoxVM.Type == StringComboBoxType.Single ?
+            XmlElement comboBoxItem = stringComboBoxVM.StringType == StringComboBoxType.Single ?
                 root.OwnerDocument.CreateElement("SingleComboBoxItem") :
                 root.OwnerDocument.CreateElement("MultiComboBoxItem");
             comboBoxItem.SetAttribute("Group", groupStringHashTable[stringComboBoxVM.Group].ToString());

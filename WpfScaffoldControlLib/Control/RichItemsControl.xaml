@@ -56,7 +56,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}">
+                        <ComboBox Grid.Column="2" ItemsSource="{Binding StringsSource}" SelectedItem="{Binding Value, Mode=TwoWay}">
                         </ComboBox>
                     </Grid>
                 </DataTemplate>
@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="ComboBox1" Grid.Column="2" ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
+                        <ComboBox x:Name="ComboBox1" Grid.Column="2" ItemsSource="{Binding ImagesSource}" SelectedItem="{Binding Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderThickness="2" BorderBrush="{Binding (TextElement.Foreground), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" CornerRadius="2" Margin="0,4">
@@ -109,7 +109,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Name, StringFormat=\{0\}：}" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center"/>
-                        <local:MultiComboBox Grid.Column="2" ItemsSource="{Binding ItemsSource}" Text="{Binding Value, Mode=TwoWay}">
+                        <local:MultiComboBox Grid.Column="2" ItemsSource="{Binding StringsSource}" Text="{Binding Value, Mode=TwoWay}">
                         </local:MultiComboBox>
                     </Grid>
                 </DataTemplate>
