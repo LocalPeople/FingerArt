@@ -206,7 +206,7 @@ namespace XcWpfControlLib.DataXml
             comboBoxItem.SetAttribute("Group", groupStringHashTable[stringComboBoxVM.Group].ToString());
             comboBoxItem.SetAttribute("Key", stringComboBoxVM.Name);
             comboBoxItem.SetAttribute("Value", stringComboBoxVM.Value.ToString());
-            SetItemsAttribute(comboBoxItem, stringComboBoxVM.ItemsSource);
+            SetItemsAttribute(comboBoxItem, stringComboBoxVM.StringsSource);
             root.AppendChild(comboBoxItem);
         }
 
@@ -283,7 +283,7 @@ namespace XcWpfControlLib.DataXml
             imageComboBoxItem.SetAttribute("Group", groupStringHashTable[imageComboBoxVM.Group].ToString());
             imageComboBoxItem.SetAttribute("Key", imageComboBoxVM.Name);
             imageComboBoxItem.SetAttribute("Value", imageComboBoxVM.Value.ToString());
-            SetItemsChildrens(imageComboBoxItem, imageComboBoxVM.ItemsSource);
+            SetItemsChildrens(imageComboBoxItem, imageComboBoxVM.ImagesSource);
             root.AppendChild(imageComboBoxItem);
         }
 

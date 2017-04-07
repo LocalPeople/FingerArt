@@ -117,11 +117,21 @@ namespace XcWpfControlLib.Control
         public string Group
         {
             get { return _group; }
+            set
+            {
+                _group = value;
+                OnPropertyChanged("Group");
+            }
         }
 
         public string Name
         {
             get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
         }
 
         public virtual object Value
@@ -242,9 +252,14 @@ namespace XcWpfControlLib.Control
         private IEnumerable<string> _itemsSource;
         private StringComboBoxType _type;
 
-        public IEnumerable<string> ItemsSource
+        public IEnumerable<string> StringsSource
         {
             get { return _itemsSource; }
+            set
+            {
+                _itemsSource = value;
+                OnPropertyChanged("ItemsSource");
+            }
         }
 
         public StringComboBoxType Type
@@ -263,9 +278,14 @@ namespace XcWpfControlLib.Control
     {
         private IEnumerable<ImageAttribute> _itemsSource;
 
-        public IEnumerable<ImageAttribute> ItemsSource
+        public IEnumerable<ImageAttribute> ImagesSource
         {
             get { return _itemsSource; }
+            set
+            {
+                _itemsSource = value;
+                OnPropertyChanged("ItemsSource");
+            }
         }
 
         public ImageComboBoxItemViewModel(string group, string name, int id, IEnumerable<ImageAttribute> itemsSource) : base(group, name, GetValueById(itemsSource, id))
@@ -279,7 +299,7 @@ namespace XcWpfControlLib.Control
             {
                 if (item.Id == id) return item;
             }
-            return null;
+            return new ImageAttribute();
         }
 
         public class ImageAttribute
@@ -288,6 +308,11 @@ namespace XcWpfControlLib.Control
             public string Name { get; }
             public string Description { get; }
             public string Path { get; }
+
+            public ImageAttribute()
+            {
+                Id = -1;
+            }
 
             public ImageAttribute(int id, string name, string description, string path)
             {
