@@ -110,11 +110,15 @@ namespace XcWpfControlLib.Control
         private RichItemType _type;
 
         #region 构造函数
-        public RichItemViewModel(string group, string name, object value, RichItemType type)
+        public RichItemViewModel(string group, string name, object value)
         {
             _group = group;
             _name = name;
             _value = value;
+        }
+
+        public RichItemViewModel(string group, string name, object value, RichItemType type) : this(group, name, value)
+        {
             _type = type;
         }
         #endregion
@@ -153,6 +157,11 @@ namespace XcWpfControlLib.Control
         public RichItemType Type
         {
             get { return _type; }
+            set
+            {
+                _type = value;
+                OnPropertyChanged("Type");
+            }
         }
         #endregion
 
@@ -172,6 +181,10 @@ namespace XcWpfControlLib.Control
         {
         }
 
+        public RichItemViewModel(string group, string name, T value) : base(group, name, value)
+        {
+        }
+
         public virtual new T Value
         {
             get
@@ -188,7 +201,9 @@ namespace XcWpfControlLib.Control
 
     public enum RichItemType
     {
-        普通文本框,
+        文本输入框,
+        整数输入框,
+        小数输入框,
         文本下拉单选框,
         文本下拉多选框,
         图片下拉单选框,
@@ -248,7 +263,7 @@ namespace XcWpfControlLib.Control
         }
         #endregion
 
-        public TextBoxItemViewModel(string group, string name, string value) : base(group, name, value, RichItemType.普通文本框)
+        public TextBoxItemViewModel(string group, string name, string value) : base(group, name, value)
         {
             string valueToString = value.ToString();
             int intTemp;
@@ -256,14 +271,17 @@ namespace XcWpfControlLib.Control
             if (int.TryParse(valueToString, out intTemp))
             {
                 _errorDesription = INT_ERROR_TIP;
+                Type = RichItemType.整数输入框;
             }
             else if (double.TryParse(valueToString, out doubleTemp))
             {
                 _errorDesription = DOUBLE_ERROR_TIP;
+                Type = RichItemType.小数输入框;
             }
             else
             {
                 _errorDesription = STRING_ERROR_TIP;
+                Type = RichItemType.文本输入框;
             }
         }
 
