@@ -49,7 +49,7 @@ namespace XcWpfControlLib.DataXml
 
         public static void Read(RichItemsControl control, string path)
         {
-            control.ImagePath = Path.Combine(Path.GetDirectoryName(path), "Image");
+            control.ImageDir = Path.Combine(Path.GetDirectoryName(path), "Image");
             control.ItemsSource = Read(path);
         }
 
@@ -148,7 +148,7 @@ namespace XcWpfControlLib.DataXml
             XmlElement textBoxItem = root.OwnerDocument.CreateElement("TextBoxItem");
             textBoxItem.SetAttribute("Group", groupStringHashTable[textBoxVM.Group].ToString());
             textBoxItem.SetAttribute("Key", textBoxVM.Name);
-            textBoxItem.SetAttribute("Value", textBoxVM.Value.ToString());
+            textBoxItem.SetAttribute("Value", textBoxVM.Value != null ? textBoxVM.Value.ToString() : "");
             root.AppendChild(textBoxItem);
         }
     }
@@ -205,7 +205,7 @@ namespace XcWpfControlLib.DataXml
                 root.OwnerDocument.CreateElement("MultiComboBoxItem");
             comboBoxItem.SetAttribute("Group", groupStringHashTable[stringComboBoxVM.Group].ToString());
             comboBoxItem.SetAttribute("Key", stringComboBoxVM.Name);
-            comboBoxItem.SetAttribute("Value", stringComboBoxVM.Value.ToString());
+            comboBoxItem.SetAttribute("Value", stringComboBoxVM.Value != null ? stringComboBoxVM.Value.ToString() : "");
             SetItemsAttribute(comboBoxItem, stringComboBoxVM.StringsSource);
             root.AppendChild(comboBoxItem);
         }
@@ -282,7 +282,7 @@ namespace XcWpfControlLib.DataXml
             XmlElement imageComboBoxItem = root.OwnerDocument.CreateElement("ImageComboBoxItem");
             imageComboBoxItem.SetAttribute("Group", groupStringHashTable[imageComboBoxVM.Group].ToString());
             imageComboBoxItem.SetAttribute("Key", imageComboBoxVM.Name);
-            imageComboBoxItem.SetAttribute("Value", imageComboBoxVM.Value.ToString());
+            imageComboBoxItem.SetAttribute("Value", imageComboBoxVM.Value != null ? imageComboBoxVM.Value.ToString() : "");
             SetItemsChildrens(imageComboBoxItem, imageComboBoxVM.ImagesSource);
             root.AppendChild(imageComboBoxItem);
         }

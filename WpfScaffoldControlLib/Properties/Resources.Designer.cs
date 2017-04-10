@@ -69,14 +69,5 @@ namespace XcWpfControlLib.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   查找类似 Test 的本地化字符串。
-        /// </summary>
-        internal static string TestResource {
-            get {
-                return ResourceManager.GetString("TestResource", resourceCulture);
-            }
-        }
     }
 }

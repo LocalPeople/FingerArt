@@ -15,17 +15,18 @@ namespace XcWpfControlLib.Control
     /// <summary>
     /// RichItemsControl.xaml 的交互逻辑
     /// </summary>
-    public partial class RichItemsControl : UserControl
+    public partial class RichItemsControl : UserControl, INotifyPropertyChanged
     {
         private IEnumerable<RichItemViewModel> _itemsSource;
         private string _imagePath;
-        public string ImagePath
+        public string ImageDir
         {
             get { return _imagePath; }
             set
             {
                 (Resources["ImageConverter"] as ImagePathConverter).ImageDirectory = value;
                 _imagePath = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImageDir"));
             }
         }
 
@@ -46,6 +47,9 @@ namespace XcWpfControlLib.Control
                 _itemsSource = value;
                 ListCollectionView _view = (ListCollectionView)CollectionViewSource.GetDefaultView(_itemsSource);
                 _view.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+                _view.IsLiveGrouping = true;// 启动分组实时更新
+                _view.LiveGroupingProperties.Add("Group");
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ItemsSource"));
             }
         }
         #endregion
@@ -60,6 +64,7 @@ namespace XcWpfControlLib.Control
         }
 
         public event EventHandler<int> OnErrorsChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
     }
 
@@ -73,18 +78,17 @@ namespace XcWpfControlLib.Control
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            RichItemViewModel vm = item as RichItemViewModel;
-            if (vm is TextBoxItemViewModel)
+            if (item is TextBoxItemViewModel)
             {
                 return TextBoxDataTemplate;
             }
-            else if (vm is ImageComboBoxItemViewModel)
+            else if (item is ImageComboBoxItemViewModel)
             {
                 return ImageComboBoxDataTemplate;
             }
-            else if (vm is StringComboBoxItemViewModel)
+            else if (item is StringComboBoxItemViewModel)
             {
-                switch (((StringComboBoxItemViewModel)vm).StringType)
+                switch (((StringComboBoxItemViewModel)item).StringType)
                 {
                     case StringComboBoxType.Single:
                         return ComboBoxDataTemplate;
@@ -136,7 +140,7 @@ namespace XcWpfControlLib.Control
             }
         }
 
-        public virtual object Value
+        public object Value
         {
             get { return _value; }
             set
@@ -162,6 +166,26 @@ namespace XcWpfControlLib.Control
         #endregion
     }
 
+    public abstract class RichItemViewModel<T> : RichItemViewModel
+    {
+        public RichItemViewModel(string group, string name, T value, RichItemType type) : base(group, name, value, type)
+        {
+        }
+
+        public virtual new T Value
+        {
+            get
+            {
+                return (T)base.Value;
+            }
+            set
+            {
+                base.Value = value;
+            }
+        }
+    }
+
+
     public enum RichItemType
     {
         普通文本框,
@@ -170,7 +194,7 @@ namespace XcWpfControlLib.Control
         图片下拉单选框,
     }
 
-    public class TextBoxItemViewModel : RichItemViewModel, INotifyDataErrorInfo
+    public class TextBoxItemViewModel : RichItemViewModel<string>, INotifyDataErrorInfo
     {
         const string INT_ERROR_TIP = "请输入整数！";
         const string DOUBLE_ERROR_TIP = "请输入数值！";
@@ -179,7 +203,7 @@ namespace XcWpfControlLib.Control
         private bool _hasErrors;
 
         #region 属性
-        public override object Value
+        public override string Value
         {
             get
             {
@@ -188,7 +212,11 @@ namespace XcWpfControlLib.Control
             set
             {
                 _hasErrors = false;
-                if (_errorDesription == INT_ERROR_TIP)
+                if (value == null)
+                {
+                    goto _SkipValidation;
+                }
+                else if (_errorDesription == INT_ERROR_TIP)
                 {
                     int result;
                     if (!int.TryParse(value.ToString(), out result))
@@ -213,13 +241,14 @@ namespace XcWpfControlLib.Control
                     }
                 }
 
+                _SkipValidation:
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("Value"));
                 base.Value = value;
             }
         }
         #endregion
 
-        public TextBoxItemViewModel(string group, string name, object value) : base(group, name, value, RichItemType.普通文本框)
+        public TextBoxItemViewModel(string group, string name, string value) : base(group, name, value, RichItemType.普通文本框)
         {
             string valueToString = value.ToString();
             int intTemp;
@@ -262,7 +291,7 @@ namespace XcWpfControlLib.Control
         Multiple,
     }
 
-    public class StringComboBoxItemViewModel : RichItemViewModel
+    public class StringComboBoxItemViewModel : RichItemViewModel<string>
     {
         private IEnumerable<string> _itemsSource;
         private StringComboBoxType _type;
@@ -273,7 +302,7 @@ namespace XcWpfControlLib.Control
             set
             {
                 _itemsSource = value;
-                OnPropertyChanged("ItemsSource");
+                OnPropertyChanged("StringsSource");
             }
         }
 
@@ -282,7 +311,7 @@ namespace XcWpfControlLib.Control
             get { return _type; }
         }
 
-        public StringComboBoxItemViewModel(string group, string name, object value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(group, name, value, GetRichItemType(type))
+        public StringComboBoxItemViewModel(string group, string name, string value, IEnumerable<string> itemsSource, StringComboBoxType type) : base(group, name, value, GetRichItemType(type))
         {
             _itemsSource = itemsSource;
             _type = type;
@@ -294,7 +323,7 @@ namespace XcWpfControlLib.Control
         }
     }
 
-    public class ImageComboBoxItemViewModel : RichItemViewModel
+    public class ImageComboBoxItemViewModel : RichItemViewModel<ImageComboBoxItemViewModel.ImageAttribute>
     {
         private IEnumerable<ImageAttribute> _itemsSource;
 
@@ -304,7 +333,7 @@ namespace XcWpfControlLib.Control
             set
             {
                 _itemsSource = value;
-                OnPropertyChanged("ItemsSource");
+                OnPropertyChanged("ImagesSource");
             }
         }
 
@@ -313,7 +342,7 @@ namespace XcWpfControlLib.Control
             _itemsSource = itemsSource;
         }
 
-        private static object GetValueById(IEnumerable<ImageAttribute> itemsSource, int id)
+        private static ImageAttribute GetValueById(IEnumerable<ImageAttribute> itemsSource, int id)
         {
             if (itemsSource != null)
             {
@@ -335,6 +364,9 @@ namespace XcWpfControlLib.Control
             public ImageAttribute()
             {
                 Id = -1;
+                Name = string.Empty;
+                Description = string.Empty;
+                Path = string.Empty;
             }
 
             public ImageAttribute(int id, string name, string description, string path)
@@ -348,6 +380,20 @@ namespace XcWpfControlLib.Control
             public override string ToString()
             {
                 return Id.ToString();
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj is ImageAttribute)
+                {
+                    return Path.Equals(((ImageAttribute)obj).Path);
+                }
+                return false;
+            }
+
+            public override int GetHashCode()
+            {
+                return Path.GetHashCode();
             }
         }
     }
@@ -363,7 +409,7 @@ namespace XcWpfControlLib.Control
             string imagePath = string.IsNullOrWhiteSpace(ImageDirectory) ?
                 value.ToString() :
                 Path.Combine(ImageDirectory, (string)value);
-            return new BitmapImage(new Uri(imagePath));
+            return File.Exists(imagePath) ? new BitmapImage(new Uri(imagePath)) : new BitmapImage(new Uri(@"../Resources/img-error.jpg", UriKind.Relative));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

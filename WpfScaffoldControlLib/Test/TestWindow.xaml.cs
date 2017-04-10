@@ -39,6 +39,11 @@ namespace XcWpfControlLib.Test
             //itemsControl.ImagePath = @"E:\Downloads";
             //RichItemsControlXmlUtil.Write(itemSource, @"C:\Users\lenovo\Desktop\RichItemsControlConfigure.xml");
 
+            //RichItemsControlXmlUtil.Read(itemsControl, @"C:\Users\lenovo\Desktop\RichItemsControlConfigure.xml");
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             RichItemsControlXmlUtil.Read(itemsControl, @"C:\Users\lenovo\Desktop\RichItemsControlConfigure.xml");
         }
     }
