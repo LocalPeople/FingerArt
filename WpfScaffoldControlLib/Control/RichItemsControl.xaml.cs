@@ -296,7 +296,10 @@ namespace XcWpfControlLib.Control
 
         public IEnumerable GetErrors(string propertyName)
         {
-            yield return _errorDesription;
+            if (propertyName == "Value")
+                return new string[] { _errorDesription };
+            else
+                return null;
         }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
