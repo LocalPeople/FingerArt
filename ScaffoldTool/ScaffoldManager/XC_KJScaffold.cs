@@ -225,7 +225,7 @@ namespace ScaffoldTool
                 {
                     if (scaffoldLineList[i].HasColumn)
                         scaffoldOverhangBeamList.Add(new ScaffoldOverhangBeam(scaffoldCornerList[i], scaffoldLineList[i].Direction));
-                    else
+                    else if (scaffoldLineList[iLast].HasColumn)
                         scaffoldOverhangBeamList.Add(new ScaffoldOverhangBeam(scaffoldCornerList[i], scaffoldLineList[iLast].Direction));
                 }
             }

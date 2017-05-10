@@ -3,11 +3,13 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using XcWpfControlLib.WpfScaffoldControlLib;
 
 namespace ScaffoldTool
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    //[Autodesk.Revit.Attributes.Journaling(Autodesk.Revit.Attributes.JournalingMode.UsingCommandData)]
     public class ModelingCommand : IExternalCommand
     {
         public static XcWpfControlLib.ProgressArgs progressBar;
@@ -17,11 +19,13 @@ namespace ScaffoldTool
             Document doc = commandData.Application.ActiveUIDocument.Document;
             IEnumerable<Level> modelingLevel, deleteLevel;
 
-            #region 界面
             List<string> alreadyBuilt, notYetBuilt;
             KJScaffoldXmlHelper.GetBuildInfo(doc, out alreadyBuilt, out notYetBuilt);
             ScaffoldWindow2 window = new ScaffoldWindow2(notYetBuilt, alreadyBuilt);
+            //UIApplication app = new UIDocument(doc).Application;
+            //app.PostCommand(RevitCommandId.LookupCommandId("ButtonModeling"));
             if (window.ShowDialog() == false)
+                #region 界面
                 return Result.Cancelled;
 
             FilteredElementCollector filter = new FilteredElementCollector(doc).OfClass(typeof(Level));
@@ -72,6 +76,7 @@ namespace ScaffoldTool
 
             progressBar.Close();
             progressBar = null;
+
 
             return Result.Succeeded;
         }
