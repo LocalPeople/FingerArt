@@ -49,7 +49,7 @@ namespace XcWpfControlLib.WpfScaffoldControlLib
             {
                 keys.Add("DSGD");
                 values.Add(Math.Round(_scaffoldHeight, 3).ToString());
-                calculationPanel.Configure(keys, values, _docPathName, keys.Count <= 28);
+                calculationPanel.Configure(keys, values, _docPathName, settingPanel.IsBuildOnGround);
                 calculationPanel.ShowResult();
             }
             else
