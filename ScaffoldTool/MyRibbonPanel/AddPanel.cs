@@ -22,6 +22,8 @@ namespace ScaffoldTool.MyRibbonPanel
             ribbonPanel.AddItem(new PushButtonData("ButtonSettingUp", "\n\n参数\n设置", Path.Combine(Global.ASSEMBLY_DIRECTORY_PATH, "ScaffoldTool.dll"), "ScaffoldTool.SettingStartUp"));
             _calculationButton = ribbonPanel.AddItem(new PushButtonData("ButtonCalculationBook", "\n\n导出\n计算书", Path.Combine(Global.ASSEMBLY_DIRECTORY_PATH, "ScaffoldTool.dll"), "ScaffoldTool.CalculationCommand")) as RibbonButton;
             _modelingButton = ribbonPanel.AddItem(new PushButtonData("ButtonModeling", "\n\n智能\n生成模型", Path.Combine(Global.ASSEMBLY_DIRECTORY_PATH, "ScaffoldTool.dll"), "ScaffoldTool.ModelingCommand")) as RibbonButton;
+            ribbonPanel = application.CreateRibbonPanel("盘扣式钢管脚手架");
+            ribbonPanel.AddItem(new PushButtonData("PKButtonOneStepToSet", "\n\n一键\n创建", Path.Combine(Global.ASSEMBLY_DIRECTORY_PATH, "ScaffoldTool.dll"), typeof(RequireScaffoldParam).FullName));
             application.ViewActivated += Application_ViewActivated;// 订阅文档加载完成事件处理程序
             application.ControlledApplication.DocumentChanged += ControlledApplication_DocumentChanged;
 

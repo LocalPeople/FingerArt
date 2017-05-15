@@ -226,6 +226,20 @@ namespace ScaffoldTool
                     progressBar.Change();
                 }
                 list8.Clear();
+
+                FamilySymbol slantRodType = XC_ScaffoldCreation.GetCustomType(doc, "星层_扣件式斜杆");
+                if (!slantRodType.IsActive)
+                    slantRodType.Activate();
+                List<MyPipeObj> list9 = readableXml.GetSlantRodsByLevels(modelingLevel);
+                progressBar.Maximum = list9.Count;
+                progressBar.Value = 0;
+                progressBar.Tip = "正在生成斜杆……";
+                foreach (var item in list9)// 斜杆
+                {
+                    doc.Create.NewFamilyInstance(Line.CreateBound(item.StartPoint, item.EndPoint), slantRodType, item.BaseLevel, StructuralType.Beam);
+                    progressBar.Change();
+                }
+                list9.Clear();
                 progressBar.Text = "正在等待模型重生成，请稍等……";
                 progressBar.IsIndeterminate = true;
                 trans.Commit();
