@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:XcWpfControlLib">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="XcWpfControlLib;component/Themes/MultiComboBox.xaml" />
+        <ResourceDictionary Source="XcWpfControlLib;component/Themes/ImageComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

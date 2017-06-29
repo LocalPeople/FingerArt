@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace XcWpfControlLib.Control
 {
-    class MultiComboBox : ComboBox
+    public class MultiComboBox : ComboBox
     {
         static MultiComboBox()
         {

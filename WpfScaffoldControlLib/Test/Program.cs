@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace XcWpfControlLib
+namespace XcWpfControlLib.Test
 {
     class Program : Application
     {
@@ -13,7 +13,7 @@ namespace XcWpfControlLib
         static void Main()
         {
             Program app = new Program();
-            app.MainWindow = new Test.TestWindow();
+            app.MainWindow = new TestWindow();
             app.MainWindow.ShowDialog();
         }
     }

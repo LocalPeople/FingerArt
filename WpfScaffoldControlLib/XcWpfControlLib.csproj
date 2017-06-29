@@ -59,12 +59,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\ImageComboBox.cs" />
     <Compile Include="DataXml\RichItemsControlXmlUtil.cs" />
     <Compile Include="WpfScaffoldControlLib\ModelingPanel.xaml.cs">
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\MultiComboBox.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Test\Program.cs" />
     <Compile Include="Control\RichItemsControl.xaml.cs">
       <DependentUpon>RichItemsControl.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,10 @@
     <Compile Include="ProgressBarWindow\ProgressBarWindow.xaml.cs">
       <DependentUpon>ProgressBarWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Themes\ImageComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WpfScaffoldControlLib\CalculationPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
