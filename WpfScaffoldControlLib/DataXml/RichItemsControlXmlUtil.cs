@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 using XcWpfControlLib.Control;
@@ -55,7 +56,16 @@ namespace XcWpfControlLib.DataXml
 
         public static ObservableCollection<RichItemViewModel> Read(string path)
         {
-            XElement doc = XElement.Load(path);
+            XElement doc;
+            try
+            {
+                doc = XElement.Load(path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发现错误:\n\n" + path + "\n\n" + ex.Message, "节点配置文件有误……");
+                throw;
+            }
 
             Dictionary<int, string> groupNumHashTable = new Dictionary<int, string>();
             foreach (var element in doc.Element("GroupTable").Elements())

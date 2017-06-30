@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\ImageComboBox.cs" />
+    <Compile Include="Control\ImageViewer.cs" />
     <Compile Include="DataXml\RichItemsControlXmlUtil.cs" />
     <Compile Include="WpfScaffoldControlLib\ModelingPanel.xaml.cs">
       <DependentUpon>ModelingPanel.xaml</DependentUpon>
@@ -83,6 +84,10 @@
       <DependentUpon>ProgressBarWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\ImageComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ImageViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

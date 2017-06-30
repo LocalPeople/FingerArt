@@ -4,5 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="XcWpfControlLib;component/Themes/MultiComboBox.xaml" />
         <ResourceDictionary Source="XcWpfControlLib;component/Themes/ImageComboBox.xaml" />
+        <ResourceDictionary Source="XcWpfControlLib;component/Themes/ImageViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
