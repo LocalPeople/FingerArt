@@ -191,13 +191,6 @@
     <Resource Include="Resources\logo2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\1463971924523.jpg" />
-    <Resource Include="Image\51593661a65fa.jpg" />
-    <Resource Include="Image\Delphox-Designs-iOS-8-Desktop-Wallpaper-5.jpg" />
-    <Resource Include="Image\壁纸20170228151200.jpg" />
-    <Resource Include="Image\壁纸20170228151429.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\img-error.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
