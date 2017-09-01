@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XcWpfControlLib"
         mc:Ignorable="d"
-        Title="脚手架智能设计软件" Height="130" Width="300" ResizeMode="NoResize" Topmost="True" Closing="Window_Closing">
+        Title="{Binding Title}" Height="130" Width="300" ResizeMode="NoResize" Topmost="True" Closing="Window_Closing">
     <StackPanel VerticalAlignment="Center">
         <TextBlock Name="taskTxt" FontSize="14" HorizontalAlignment="Left" Margin="8" Text="{Binding Text}" />
         <Grid Margin="8,0">

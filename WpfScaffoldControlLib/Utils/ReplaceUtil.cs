@@ -6,6 +6,7 @@ using Microsoft.JScript.Vsa;
 using Microsoft.JScript;
 using System.CodeDom.Compiler;
 
+#pragma warning disable 618
 namespace ControlLibraryUtils
 {
     /// <summary>

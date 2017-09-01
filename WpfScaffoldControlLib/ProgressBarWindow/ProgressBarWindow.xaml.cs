@@ -82,6 +82,7 @@ namespace XcWpfControlLib
     public class ProgressArgs : INotifyPropertyChanged
     {
         #region 私有字段
+        private string _title = "脚手架智能设计软件";
         private string _text = "请稍等……";
         private string _tip;
         private double _maximum = 1;
@@ -122,6 +123,12 @@ namespace XcWpfControlLib
         }
 
         #region 属性
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+
         public string Tip
         {
             get { return _tip; }

@@ -43,21 +43,14 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Dll\Office\DocumentFormat.OpenXml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2016\RevitAPI.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>C:\Program Files\Autodesk\Revit 2016\RevitAPI.dll</HintPath>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2016\RevitAPIUI.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>C:\Program Files\Autodesk\Revit 2016\RevitAPIUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration">
@@ -77,49 +70,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyRibbonPanel\SettingStartUpAdater.cs" />
-    <Compile Include="ReplaceUtil.cs" />
     <Compile Include="ScaffoldComponent\IBuilder.cs" />
     <Compile Include="ScaffoldComponent\ScaffoldFixture.cs" />
     <Compile Include="ScaffoldManager\ScaffoldBase.cs" />
     <Compile Include="ScaffoldComponent\ScaffoldBoard.cs" />
     <Compile Include="PKScaffoldXmlHelper.cs" />
     <Compile Include="ScaffoldXmlHelperBase.cs" />
-    <Compile Include="WinformUI\ModelingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinformUI\ModelingForm.Designer.cs">
-      <DependentUpon>ModelingForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyRibbonPanel\CalculationCommand.cs" />
-    <Compile Include="WinformUI\CalculationSettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinformUI\CalculationSettingForm.designer.cs">
-      <DependentUpon>CalculationSettingForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinformUI\FloorScaffoldParamForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinformUI\FloorScaffoldParamForm.Designer.cs">
-      <DependentUpon>FloorScaffoldParamForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="GeomUtil.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="MyRibbonPanel\ModelingCommand.cs" />
-    <Compile Include="WinformUI\MyDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WinformUI\MyDataGridView.Designer.cs">
-      <DependentUpon>MyDataGridView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="RequireScaffoldParam.cs" />
-    <Compile Include="WinformUI\ProjectBasicForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinformUI\ProjectBasicForm.Designer.cs">
-      <DependentUpon>ProjectBasicForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericModelSelectionFilter.cs" />
     <Compile Include="MyRibbonPanel\AddPanel.cs" />
@@ -131,52 +92,10 @@
     <Compile Include="ScaffoldComponent\ScaffoldUtil.cs" />
     <Compile Include="KJScaffoldXmlHelper.cs" />
     <Compile Include="MyRibbonPanel\SettingStartUp.cs" />
-    <Compile Include="WinformUI\StartForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinformUI\StartForm.Designer.cs">
-      <DependentUpon>StartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StoryBoard\Animation.cs" />
-    <Compile Include="StoryBoard\MyVScrollBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="StoryBoard\StoryBoard.cs" />
-    <Compile Include="WinformUI\WordExportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinformUI\WordExportForm.designer.cs">
-      <DependentUpon>WordExportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="XC_GenericModel.cs" />
     <Compile Include="ScaffoldManager\XC_KJScaffold.cs" />
     <Compile Include="ScaffoldManager\XC_PKScaffold.cs" />
     <Compile Include="XC_ScaffoldCreation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="WinformUI\CalculationSettingForm.resx">
-      <DependentUpon>CalculationSettingForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinformUI\FloorScaffoldParamForm.resx">
-      <DependentUpon>FloorScaffoldParamForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinformUI\ModelingForm.resx">
-      <DependentUpon>ModelingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinformUI\MyDataGridView.resx">
-      <DependentUpon>MyDataGridView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinformUI\ProjectBasicForm.resx">
-      <DependentUpon>ProjectBasicForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="WinformUI\StartForm.resx">
-      <DependentUpon>StartForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinformUI\WordExportForm.resx">
-      <DependentUpon>WordExportForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
